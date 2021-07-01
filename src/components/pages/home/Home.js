@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Background, Container, Description, Header, Title } from '../../style/StyledComponent';
 import AboutMe from './about-me/AboutMe';
@@ -69,7 +68,7 @@ const Home = ({ path, setPath }) => {
                         Github
                     </a>
                 </Container>
-                
+
                 <Container>
                     <Title>
                         Contact

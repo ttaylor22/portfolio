@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import img from '../pages/home/images/DSCN0096.jpg'
+
 
 export const Background = styled.div`
 
@@ -11,7 +11,7 @@ export const Background = styled.div`
     align-items: center;
 
     ${props => props.image && props.image === 'enabled' ?
-        `background-image: url(${img});
+        `background-image: url(/images/DSCN0096.jpg);
          background-color: black;
          background-repeat: no-repeat;
          background-size: cover;
