@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import {Link} from "react-router-dom";
+import React from "react";
 import { 
     Background, Header,
-    Section, Container,
+    Container,
     Title, Description
 } from "../../../style/StyledComponent";
 import ProgressLoader from "../../../tools/react-progress-loader";
@@ -14,24 +13,18 @@ import ProgressLoader from "../../../tools/react-progress-loader";
 export const Skills = ({path}) => {
 
 
-    useEffect(() => {
-
-    }, [])
 
     return (
         <Background id="skills">
             <Header>Current toolset</Header>
-            <Section>
+            
                 <Container>
                     <Title>
                         My creative skills & expriences.
                     </Title>
                     <Description>
-                        Please feel free to contact me at my email or just send a message through the form.
+                    As a developer, I came across many different tools. From design using Adobe XD to deploying instances to Amazon Elastic Compute Cloud (EC2). And the main enjoyment of ReactJS frontend capabilities and NodeJS with Express and Mongoose abilities to construct an API.   
                     </Description>
-                    <Link to='/contact' className='nav-link-cs'>
-                        Read more
-                    </Link>
                 </Container>
 
                 <Container>
@@ -40,10 +33,10 @@ export const Skills = ({path}) => {
                     <ProgressLoader title="javascript" timeInterval={30} percentage={80} path={path}/>
                     <ProgressLoader title="reactjs" timeInterval={30} percentage={80} path={path}/>
                     <ProgressLoader title="sql" timeInterval={40} percentage={60} path={path}/>
-                    <ProgressLoader title="nodejs" timeInterval={40} percentage={60} path={path}/>
+                    <ProgressLoader title="nodejs" timeInterval={35} percentage={70} path={path}/>
                     <ProgressLoader title="java" timeInterval={30} percentage={80} path={path}/>
                 </Container>
-            </Section>
+           
         </Background>
     )
 }

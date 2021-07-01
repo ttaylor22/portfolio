@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+
 
 
 const ProgressLoader = ({ title, percentage, timeInterval, path, isStatic, titleStyle, percentageStyle, progressStyle, progressContainerStyle }) => {
@@ -39,17 +39,18 @@ const ProgressLoader = ({ title, percentage, timeInterval, path, isStatic, title
     const [bool, setBool] = useState(false)
     const move = useCallback((l) => {
 
-        if ((!path || path === '#skills') && !bool) {
-            let i = 1;
-            var per = document.getElementsByClassName(`percentage-${randID}`)[0];
-            var bar = document.getElementsByClassName(`bar-${randID}`)[0];
+        var per = document.getElementsByClassName(`percentage-${randID}`)[0];
+        var bar = document.getElementsByClassName(`bar-${randID}`)[0];
+
+        if (path === '#skills' && !bool) {
+
 
             var width = 1;
             var id = setInterval(frame, timeInterval);
             function frame() {
                 if (width >= l) {
                     clearInterval(id);
-                    i = 0;
+
                 } else {
                     width++;
                     bar.style.width = width + "%";
@@ -59,8 +60,11 @@ const ProgressLoader = ({ title, percentage, timeInterval, path, isStatic, title
 
 
             setBool(true)
+        } else if (path !== '#skills' && !bool) {
+            bar.style.width = 0 + "%";
+            per.innerHTML = 0 + "%";
         }
-    }, [bool, setBool])
+    }, [path, bool, setBool])
 
     const dontMove = () => {
         var per = document.getElementsByClassName(`percentage-${randID}`)[0];

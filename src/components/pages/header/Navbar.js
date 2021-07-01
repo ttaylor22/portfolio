@@ -90,9 +90,9 @@ export const Navbar = ({path, setPath}) => {
         <>
             <nav className="custom-navbar">
                 <div className="navbar-container">
-                    <Link to="/#projects" className="navbar-logo">
+                    <HashLink to="#projects" className="navbar-logo" scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}  onClick={closeMobileMenu}>
                         <img src="images/tevin.jpg" alt="Avatar" className="profile-img" />
-                    </Link>
+                    </HashLink>
                     <div className="menu-icon" onClick={() => setClick(!click)}>
                         <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
                     </div>

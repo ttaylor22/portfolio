@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as emailjs from 'emailjs-com'
 import { Button, Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap'
 import './Contact.css'
-import { Background, Container, Header, IconLink, LinksContainer, Section, SkewIconLink, SkewLinksContainer, Title } from '../../../style/StyledComponent';
+import { Background, Container, Header, SkewIconLink, SkewLinksContainer, Title } from '../../../style/StyledComponent';
 
 
 
@@ -164,102 +164,104 @@ export const Contact = () => {
     return (
 
         <Background id="contact">
-            <Header>Get in Touch</Header>
-            <Section>
-                <Container textAlign='center'>
-                    <Title>
-                        Send me a message and I'll get back in touch shortly.
-                    </Title>
-                </Container>
+            <Container>
+                <Header>Get in Touch</Header>
+            </Container>
 
-                <Container>
-                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                        <FormGroup>
-                            <FormLabel className="text-muted">Email address</FormLabel>
-                            <FormControl
-                                required
-                                type="email"
-                                name="email"
-                                value={contactForm.obj.email}
-                                onChange={(e) => handleChange('email', e)}
-                                placeholder="Email"
-                                isInvalid={hasError("email") !== -1}
-                            />
-                            <FormControl.Feedback type="invalid">
-                                {errorsMsg.email}
-                            </FormControl.Feedback>
-                        </FormGroup>
-                        <FormGroup>
-                            <FormLabel className="text-muted">Name</FormLabel>
-                            <FormControl
-                                required
-                                type="text"
-                                name="name"
-                                value={contactForm.obj.name}
-                                onChange={(e) => handleChange('name', e)}
-                                placeholder="Name"
-                                isInvalid={hasError("name") !== -1}
-                            />
-                            <FormControl.Feedback type="invalid">
-                                {errorsMsg.name}
-                            </FormControl.Feedback>
-                        </FormGroup>
-                        <FormGroup>
-                            <FormLabel className="text-muted">Subject</FormLabel>
-                            <FormControl
-                                required
-                                type="text"
-                                name="subject"
-                                value={contactForm.obj.subject}
-                                onChange={(e) => handleChange('subject', e)}
-                                placeholder="Subject"
-                                isInvalid={hasError("subject") !== -1}
-                            />
-                            <FormControl.Feedback type="invalid">
-                                {errorsMsg.subject}
-                            </FormControl.Feedback>
-                        </FormGroup>
-                        <FormGroup>
-                            <FormLabel className="text-muted">Message</FormLabel>
-                            <FormControl
-                                required
-                                type="textarea"
-                                name="message"
-                                value={contactForm.obj.message}
-                                onChange={(e) => handleChange('message', e)}
-                                placeholder="Message"
-                                isInvalid={hasError("message") !== -1}
-                            />
-                            <FormControl.Feedback type="invalid">
-                                {errorsMsg.message}
-                            </FormControl.Feedback>
-                        </FormGroup>
-                        {returnResult}
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+            <Container textAlign='center'>
+                <Title>
+                    Send me a message and I'll get back in touch shortly.
+                </Title>
+            </Container>
 
-                    </Form>
-                </Container>
-                <Container>
-                    <SkewLinksContainer>
-                        <SkewIconLink fontSize={50} color='blue' target="_blank" rel="noreferrer" href='https://www.linkedin.com/in/tevin-taylor-a5ba1bbb/'>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span className='fab fa-linkedin' />
-                        </SkewIconLink>
-                        <SkewIconLink fontSize={50} color='black' target="_blank" rel="noreferrer" href='https://github.com/ttaylor22'>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span className='fab fa-github' />
-                        </SkewIconLink>
-                    </SkewLinksContainer>
-                </Container>
-            </Section>
+            <Container>
+                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                    <FormGroup>
+                        <FormLabel className="text-muted">Email address</FormLabel>
+                        <FormControl
+                            required
+                            type="email"
+                            name="email"
+                            value={contactForm.obj.email}
+                            onChange={(e) => handleChange('email', e)}
+                            placeholder="Email"
+                            isInvalid={hasError("email") !== -1}
+                        />
+                        <FormControl.Feedback type="invalid">
+                            {errorsMsg.email}
+                        </FormControl.Feedback>
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel className="text-muted">Name</FormLabel>
+                        <FormControl
+                            required
+                            type="text"
+                            name="name"
+                            value={contactForm.obj.name}
+                            onChange={(e) => handleChange('name', e)}
+                            placeholder="Name"
+                            isInvalid={hasError("name") !== -1}
+                        />
+                        <FormControl.Feedback type="invalid">
+                            {errorsMsg.name}
+                        </FormControl.Feedback>
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel className="text-muted">Subject</FormLabel>
+                        <FormControl
+                            required
+                            type="text"
+                            name="subject"
+                            value={contactForm.obj.subject}
+                            onChange={(e) => handleChange('subject', e)}
+                            placeholder="Subject"
+                            isInvalid={hasError("subject") !== -1}
+                        />
+                        <FormControl.Feedback type="invalid">
+                            {errorsMsg.subject}
+                        </FormControl.Feedback>
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel className="text-muted">Message</FormLabel>
+                        <FormControl
+                            required
+                            as="textarea"
+                            name="message"
+                            value={contactForm.obj.message}
+                            onChange={(e) => handleChange('message', e)}
+                            placeholder="Message"
+                            isInvalid={hasError("message") !== -1}
+                        />
+                        <FormControl.Feedback type="invalid">
+                            {errorsMsg.message}
+                        </FormControl.Feedback>
+                    </FormGroup>
+                    {returnResult}
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+
+                </Form>
+            </Container>
+            <Container>
+                <SkewLinksContainer>
+                    <SkewIconLink fontSize={50} color='blue' target="_blank" rel="noreferrer" href='https://www.linkedin.com/in/tevin-taylor-a5ba1bbb/'>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span className='fab fa-linkedin' />
+                    </SkewIconLink>
+                    <SkewIconLink fontSize={50} color='black' target="_blank" rel="noreferrer" href='https://github.com/ttaylor22'>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span className='fab fa-github' />
+                    </SkewIconLink>
+                </SkewLinksContainer>
+            </Container>
+
         </Background>
     )
 }

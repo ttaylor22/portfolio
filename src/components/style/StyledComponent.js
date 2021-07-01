@@ -1,16 +1,29 @@
 import styled, { keyframes } from "styled-components";
+import img from '../pages/home/images/DSCN0096.jpg'
 
 export const Background = styled.div`
-    background: black;
-    padding: 5%;
-    width: 100%;
+
+    min-height: ${window.innerHeight}px;
+    padding: 80px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    ${props => props.image && props.image === 'enabled' ?
+        `background-image: url(${img});
+         background-color: black;
+         background-repeat: no-repeat;
+         background-size: cover;
+         background-position: center;`:
+        'background: black;'
+    }
 `
 
 export const Header = styled.h1`
     text-align: center;
     font-feature-settings: "pcap", "c2pc";
     font-variant-caps: all-petite-caps;
-    margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2;
     font-size: 2.5rem;
@@ -130,7 +143,7 @@ const hovering = keyframes`
     }
 
     to {
-        opacity: 0.2;
+        opacity: 0.5;
         transform: translate(10%, -10%);
     }
 
@@ -155,12 +168,12 @@ export const SkewIconLinkAuto = styled.div`
         color: ${props => props.color ? props.color : 'blue'};
         background: #2a2727e6;
         box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.05);   
-        animation: ${hovering} 5s linear infinite;
+        animation: ${hovering} 2s linear infinite alternate;
         
     }
 
     span:nth-child(1) {
-        animation-delay: 0.5s;
+        animation-delay: 2.5s;
         top: -10%;
         left: 10%;
         
@@ -168,28 +181,28 @@ export const SkewIconLinkAuto = styled.div`
     }
 
     span:nth-child(2) {
-        animation-delay: 0.4s;
+        animation-delay: 2.0s;
         top: -20%;
         left: 20%;
         
     }
 
     span:nth-child(3) {
-        animation-delay: 0.3s;
+        animation-delay: 1.5s;
         top: -30%;
         left: 30%;
         
     }
 
     span:nth-child(4) {
-        animation-delay: 0.2s;
+        animation-delay: 1.0s;
         top: -40%;
         left: 40%;
         
     }
 
     span:nth-child(5) {
-        animation-delay: 0.1s;
+        animation-delay: 0.5s;
         top: -50%;
         left: 50%;
         
@@ -199,16 +212,16 @@ export const SkewIconLinkAuto = styled.div`
     
     `
 
-    // const float = keyframes`
+// const float = keyframes`
 
-    // `
+// `
 
 export const ProjectIconLinkAuto = styled.div`
 
     position: relative;
     width: ${props => props.width ? `${props.width}` : '250px'};
     height: ${props => props.height ? `${props.height}` : '250px'};
-    margin: 0 20px;
+    margin: 20px;
     
     span {
         position: absolute;
@@ -218,6 +231,7 @@ export const ProjectIconLinkAuto = styled.div`
         display: flex;
         z-index: 1;
         color: ${props => props.color ? props.color : 'blue'};
+        
         
     }
 
@@ -241,14 +255,12 @@ export const ProjectIconLinkAuto = styled.div`
         
     }
     
-    @media only screen and (max-width: 500px) {
-        margin: auto
-    }
+
     `
 
 export const ImageSpan = styled.span`
     background: ${props => props.backgroundImage ? `url(${props.backgroundImage})` : 'none'} no-repeat;
     background-size: ${props => props.backgroundSize ? props.backgroundSize : '100%'};
-    width: ${props => props.width ? props.width: '100%'};
-    height: ${props => props.height ? props.height: '100%'};
+    width: ${props => props.width ? props.width : '100%'};
+    height: ${props => props.height ? props.height : '100%'};
     `

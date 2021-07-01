@@ -13,7 +13,7 @@
   padding: 15px;
 }
 
-.container {
+/* .container {
   z-index: 1;
   width: 100%;
   max-width: 1300px;
@@ -21,7 +21,7 @@
   margin-left: auto;
   padding-right: 50px;
   padding-left: 50px;
-}
+} */
 
 .navbar-logo {
   color: #fff;
