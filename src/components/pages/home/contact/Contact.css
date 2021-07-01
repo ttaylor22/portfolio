@@ -1,0 +1,23 @@
+.contact-section{
+    max-width: 600px;
+    width: 100%;
+    padding: 50px 30px;
+}
+
+
+.status {
+    transition: all 0.7s ease;
+}
+
+.hide {
+    opacity: 0;
+}
+
+.other-links{
+    display: flex;
+    justify-content: space-around;
+}
+
+.icon-link{
+    font-size: 50px
+}
