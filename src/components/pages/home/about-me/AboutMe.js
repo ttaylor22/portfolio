@@ -18,7 +18,7 @@ const AboutMe = () => {
             </Container>
             <Container>
                 Resume
-                <iframe src="/docs/Tevin Taylor's Resume.pdf" width="100%" height="515px">
+                <iframe src={`${process.env.PUBLIC_URL}/docs/Tevin Taylor's Resume.pdf`} width="100%" height="515px">
                 </iframe>
             </Container>
 

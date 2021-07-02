@@ -16,16 +16,16 @@ const generate = () => {
         link: 'https://trufro.com',
         images: [
             {
-                image: 'images/trufro-1.jpg',
+                image: `${process.env.PUBLIC_URL}/images/trufro-1.jpg`,
                 paragraph: 'Build with:\n*MongoDB, ExpressJS, ReactJS, NodeJS \nDeployed on:\n*Amazon Elastic Compute Cloud (Amazon EC2)'
                 ,
             },
             {
-                image: 'images/trufro-2.jpg',
+                image: `${process.env.PUBLIC_URL}/images/trufro-2.jpg`,
                 paragraph: '*Create room using uuvid or custom address with or without an password.\n  *Provide access to join existing rooms.\n *Upon creating/joining a room provide a display name for other peers.\n *Host has access to remove peers from their room.',
             },
             {
-                image: 'images/trufro-3.jpg',
+                image: `${process.env.PUBLIC_URL}/images/trufro-3.jpg`,
                 paragraph: '*Host has access to change password while room is running.\n *Grants communication amongst peers in room.\n *Ability to enable/disable audio and video amongst specific peer in a room.\n *Capable to test, and change audio and video devices through settings.\n *Auto migrates to new host, if host leaves room.',
             }
         ],

@@ -10,7 +10,7 @@ function App() {
  
   const [path, setPath] = useState()
   return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Navbar path={path} setPath={setPath}/>
         <Switch>
           <Route path='/' exact render={(props) => <Home {...props} path={path} setPath={setPath}/>}/>

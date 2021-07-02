@@ -11,7 +11,7 @@ export const Background = styled.div`
     align-items: center;
 
     ${props => props.image && props.image === 'enabled' ?
-        `background-image: url(/images/DSCN0096.jpg);
+        `background-image: url(${process.env.PUBLIC_URL}/images/DSCN0096.jpg);
          background-color: black;
          background-repeat: no-repeat;
          background-size: cover;

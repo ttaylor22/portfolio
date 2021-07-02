@@ -91,7 +91,7 @@ export const Navbar = ({path, setPath}) => {
             <nav className="custom-navbar">
                 <div className="navbar-container">
                     <HashLink to="#projects" className="navbar-logo" scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}  onClick={closeMobileMenu}>
-                        <img src="images/tevin.jpg" alt="Avatar" className="profile-img" />
+                        <img src={`${process.env.PUBLIC_URL}/images/tevin.jpg`} alt="Avatar" className="profile-img" />
                     </HashLink>
                     <div className="menu-icon" onClick={() => setClick(!click)}>
                         <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
@@ -119,7 +119,7 @@ export const Navbar = ({path, setPath}) => {
                     </div>
                     {button && <Button buttonStyle='btn--outline'
                         buttonSize='btn--mobile'
-                        onClick={closeMobileMenu} pathTo="/docs/Tevin Taylor's Resume.pdf">
+                        onClick={closeMobileMenu} pathTo={`${process.env.PUBLIC_URL}/docs/Tevin Taylor's Resume.pdf`}>
                         Download Resume</Button>}
                 </div>
             </nav>
