@@ -43,6 +43,7 @@ export const Section = styled.div`
 `
 
 export const Container = styled.div`
+    width: 100%;
     max-width: ${props => props.width ? props.width : '700px'};
     padding: 30px 50px;
     text-align: ${props => props.textAlign ? props.textAlign : 'none'};
