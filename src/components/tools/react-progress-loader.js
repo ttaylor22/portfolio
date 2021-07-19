@@ -64,7 +64,7 @@ const ProgressLoader = ({ title, percentage, timeInterval, path, isStatic, title
             bar.style.width = 0 + "%";
             per.innerHTML = 0 + "%";
         }
-    }, [path, bool, setBool])
+    }, [path, bool, setBool, randID, timeInterval])
 
     const dontMove = () => {
         var per = document.getElementsByClassName(`percentage-${randID}`)[0];

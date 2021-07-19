@@ -3,15 +3,17 @@ import styled, { keyframes } from "styled-components";
 
 export const Background = styled.div`
 
-    min-height: ${window.innerHeight}px;
-    padding: 80px 0px;
+    min-height: ${props => props.minHeight};
+    padding: ${props => props.padding ? props.padding : '80px 0 0 0'};
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
 
     ${props => props.image && props.image === 'enabled' ?
-        `background-image: url(${process.env.PUBLIC_URL}/images/DSCN0096.jpg);
+        `background-image: linear-gradient(
+            to bottom,transparent,#000000
+          ), url(${process.env.PUBLIC_URL}/images/galaxy.jpg);
          background-color: black;
          background-repeat: no-repeat;
          background-size: cover;
@@ -19,6 +21,7 @@ export const Background = styled.div`
         'background: black;'
     }
 `
+
 
 export const Header = styled.h1`
     text-align: center;
@@ -40,9 +43,8 @@ export const Section = styled.div`
 `
 
 export const Container = styled.div`
-    max-width: 500px;
-    padding: 50px 30px;
-    width: 100%;
+    max-width: ${props => props.width ? props.width : '700px'};
+    padding: 30px 50px;
     text-align: ${props => props.textAlign ? props.textAlign : 'none'};
 
     .nav-link-cs {
@@ -71,8 +73,6 @@ export const SkewLinksContainer = styled.div`
     display: flex;
     justify-content: space-evenly;
     align-self: ${props => props.alignSelf ? props.alignSelf : 'none'};
-    transform-style: preserve-3d;
-    transform: rotate(-25deg) skew(25deg);
 `
 
 export const IconLink = styled.a`
@@ -87,6 +87,8 @@ export const SkewIconLink = styled.a`
     position: relative;
     width: ${props => props.fontSize ? `${props.fontSize}px` : '50px'};
     height: ${props => props.fontSize ? `${props.fontSize}px` : '50px'};
+    transform-style: preserve-3d;
+    transform: rotate(-35deg) skew(20deg);
     
     span {
         position: absolute;
@@ -154,6 +156,8 @@ export const SkewIconLinkAuto = styled.div`
     position: relative;
     width: ${props => props.fontSize ? `${props.fontSize}px` : '50px'};
     height: ${props => props.fontSize ? `${props.fontSize}px` : '50px'};
+    transform-style: preserve-3d;
+    transform: rotate(-35deg) skew(20deg);
 
     span {
         position: absolute;

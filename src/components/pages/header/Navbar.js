@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Button } from '../../Button';
 import './Navbar.css'
 import { HashLink } from 'react-router-hash-link'
 
-export const Navbar = ({path, setPath}) => {
-    // const location = useLocation()
+export const Navbar = () => {
+   
     const history = useHistory()
+    const [path, setPath] = useState(history.location.hash)
 
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
@@ -16,7 +17,7 @@ export const Navbar = ({path, setPath}) => {
         setClick(false)
     }
 
-    const showButton = () => {
+    const showButton = useCallback(() => {
         var navmenu = document.getElementsByClassName("nav-menu")[0];
         if (window.innerWidth <= 960) {
             setButton(false)
@@ -25,7 +26,7 @@ export const Navbar = ({path, setPath}) => {
             setButton(true);
             navmenu.style.backgroundColor = 'none';
         }
-    }
+    }, [setButton])
 
     const makeSticky = () => {
         var navbar = document.getElementsByClassName("custom-navbar")[0];
@@ -57,18 +58,17 @@ export const Navbar = ({path, setPath}) => {
         }
     }
 
-    const pathChange = (str) => {
-        setPath(str)
-    }
+    const pathChange = useCallback(() => {
+        setPath(history.location.hash)
+    },[setPath, history])
 
     useEffect(() => {
 
-        history.listen(() => {
-            pathChange(history.location.hash)
-        })
+        history.listen(pathChange)
 
 
         makeSticky()
+        //window.addEventListener('hashchange', pathChange, false);
         window.addEventListener('scroll', makeSticky)
         window.addEventListener('resize', makeSticky)
 
@@ -76,13 +76,14 @@ export const Navbar = ({path, setPath}) => {
         window.addEventListener('resize', showButton)
         //Offload
         return () => {
+            //window.removeEventListener('hashchange', pathChange, false);
             window.removeEventListener('scroll', makeSticky)
             window.removeEventListener('resize', makeSticky)
 
             window.removeEventListener('resize', showButton);
 
         }
-    }, []);
+    }, [pathChange, showButton, history]);
 
 
 
@@ -90,7 +91,7 @@ export const Navbar = ({path, setPath}) => {
         <>
             <nav className="custom-navbar">
                 <div className="navbar-container">
-                    <HashLink to="#projects" className="navbar-logo" scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}  onClick={closeMobileMenu}>
+                    <HashLink to="#projects" className="navbar-logo" scroll={(el) => el.scrollIntoView({ behavior: "smooth" })} onClick={closeMobileMenu}>
                         <img src={`${process.env.PUBLIC_URL}/images/tevin.jpg`} alt="Avatar" className="profile-img" />
                     </HashLink>
                     <div className="menu-icon" onClick={() => setClick(!click)}>

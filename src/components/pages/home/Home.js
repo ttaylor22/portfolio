@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { HashLink } from 'react-router-hash-link';
-import { Background, Container, Description, Header, Title } from '../../style/StyledComponent';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import AboutMe from './about-me/AboutMe';
 import Contact from './contact/Contact';
 import './Home.css'
@@ -10,91 +9,66 @@ import Skills from './skills/Skills';
 
 
 
-const Home = ({ path, setPath }) => {
+const Home = () => {
+    const history = useHistory()
+    const [path, setPath] = useState(history.location.hash)
+    const [minHeight, setMinHeight] = useState(`${window.innerHeight}px`)
 
 
+    const handleResize = () => {
+        setMinHeight(`${window.innerHeight}px`)
+    }
 
-
-    const validateSection = () => {
+    const validateSection = useCallback(() => {
         const elems = document.querySelectorAll('div[id]')
         elems.forEach(elem => {
             const rect = elem.getBoundingClientRect()
-            if ((rect.top > 0 && rect.top < 150) || (rect.top === 0 && elem.id === 'projects')) {
-                setPath(`#${elem.id}`)   
+            if (
+                rect.top >= 0 &&
+                rect.top <= 150
+                // rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+            ) {
+                setPath(`#${elem.id}`)
+                history.replace(`#${elem.id}`)
             }
         })
-    }
+      
+    }, [setPath, history])
+
+    // const validateSection1 = useCallback(() => {
+    //     const elems = document.querySelectorAll('div[id]')
+    //     elems.forEach(elem => {
+    //         const rect = elem.getBoundingClientRect()
+    //         if ((rect.top > 0 && rect.top < 150) || (rect.top === 0 && elem.id === 'projects')) {
+    //             setPath(`#${elem.id}`)
+    //         }
+    //     })
+    // }, [setPath])
 
 
 
     useEffect(() => {
         validateSection()
-
+        window.addEventListener('resize', handleResize)
         window.addEventListener("scroll", validateSection)
         return () => {
+            window.removeEventListener('resize', handleResize)
             window.removeEventListener("scroll", validateSection)
 
         }
-    }, []);
+    }, [validateSection]);
 
     return (
 
-        <div style={{ color: 'white' }}>
-            <Background id="projects" image="enabled">
-                <Container style={{ maxWidth: '900px' }}>
+        <>
+            <Projects minHeight={minHeight} path={path} />
 
-                    <Header>Tevin Taylor</Header>
-                    <div style={{ textAlign: 'center', fontSize: "xx-large", fontWeight: "lighter" }}>Full Stack Developer</div>
+            <Skills minHeight={minHeight} path={path} />
 
-                    <Projects />
-                </Container>
-            </Background>
-            <Background>
+            <AboutMe minHeight={minHeight} path={path} />
 
-                <Container>
-                    <Header>
-                        Looking for more projects and/or how to reach me?
-                    </Header>
-                </Container>
-
-                <Container>
-                    <Title>
-                        Other projects
-                    </Title>
-                    <Description>
-                        Please visit my github and take a look at other work of mine. If interested in seeing my private respositories, please send me email for an request. 
-                    </Description>
-                    <a href='https://github.com/ttaylor22' className='nav-intro-links'>
-                        Github
-                    </a>
-                </Container>
-
-                <Container>
-                    <Title>
-                        Contact
-                    </Title>
-                    <Description>
-                        Please feel free to contact me at my email or just send a message through the form.
-                    </Description>
-                    <HashLink to="#contact" scroll={(el) => el.scrollIntoView({ behavior: "smooth" })} className='nav-intro-links'>
-                        Message me
-                    </HashLink>
-                </Container>
-
-
-                <Container>
-                    <Header>
-                        Operate as a human behind the screen not as a robot inside one, then you will discover a true creative mind.
-                    </Header>
-                </Container>
-            </Background>
-
-            <Skills path={path} />
-
-            <AboutMe />
-
-            <Contact />
-        </div>
+            <Contact minHeight={minHeight} path={path} />
+        </>
 
     )
 }

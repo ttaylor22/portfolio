@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import faker from 'faker';
 import './Projects.css'
 
 import styled from 'styled-components';
-import { ImageSpan, ProjectIconLinkAuto, SkewIconLinkAuto, SkewLinksContainer } from '../../../style/StyledComponent';
+import { Container, Background, Header, ImageSpan, ProjectIconLinkAuto, SkewIconLinkAuto, SkewLinksContainer } from '../../../style/StyledComponent';
+import { AnimatePresence, motion } from 'framer-motion';
+
 
 
 
 const generate = () => {
     let projects = []
-    var i;
+
     const project = {
         title: 'Trufro',
         subtitle: 'Trufro is a web platform, which provides a peer to peer connection between users for video and messaging purposes',
@@ -17,16 +19,45 @@ const generate = () => {
         images: [
             {
                 image: `${process.env.PUBLIC_URL}/images/trufro-1.jpg`,
-                paragraph: 'Build with:\n*MongoDB, ExpressJS, ReactJS, NodeJS \nDeployed on:\n*Amazon Elastic Compute Cloud (Amazon EC2)'
+                paragraph: `
+                <h3>Application stack:</h3> 
+                <ul>
+                <li>MongoDB</li>
+                <li>ExpressJS</li> 
+                <li>ReactJS</li> 
+                <li>NodeJS</li> 
+                </ul>
+                <h3>Deployment Server:</h3>
+                <ul>
+                <li>Amazon Elastic Compute Cloud (Amazon EC2)</li>
+                </ul>
+                `
                 ,
             },
             {
                 image: `${process.env.PUBLIC_URL}/images/trufro-2.jpg`,
-                paragraph: '*Create room using uuvid or custom address with or without an password.\n  *Provide access to join existing rooms.\n *Upon creating/joining a room provide a display name for other peers.\n *Host has access to remove peers from their room.',
+                paragraph: `
+                <ul>
+                <li>Create room using uuvid or use own custom address</li>
+                <li>Add password to room for security</li>
+                <li>Able to join existing rooms</li>
+                <li>Add display name for other peers in joined rooms</li>
+                </ul>
+                `,
             },
             {
                 image: `${process.env.PUBLIC_URL}/images/trufro-3.jpg`,
-                paragraph: '*Host has access to change password while room is running.\n *Grants communication amongst peers in room.\n *Ability to enable/disable audio and video amongst specific peer in a room.\n *Capable to test, and change audio and video devices through settings.\n *Auto migrates to new host, if host leaves room.',
+                paragraph: `
+                <ul>
+                <li>As host, access to remove peers from their room</li>
+                <li>As host, access to change password while in generated room.</li>
+                <li>Grants communication amongst peers in room</li>
+                <li>Able to message other peers through the chat window. Equipped with newly added emojis</li>
+                <li>Able to enable/disable audio and video functionalities</li>
+                <li>Capable to test, change audio and video devices through settings</li>
+                <li>Auto migrates to new host, if host leaves room</li>
+                </ul>
+                `,
             }
         ],
         color: faker.vehicle.color(),
@@ -69,7 +100,7 @@ const MainContainer = styled.div`
     flex-direction: column;
     width: 100%;
     padding: 50px 15px 0 15px; 
-    border-bottom: 1px solid rgb(0 0 0 / 50%);
+    
 
 `
 
@@ -106,7 +137,7 @@ const DisplayImagePhone = ({ direction, image, paragraph }) => {
     return (
         <MiniContainer flexDirection='row-reverse'>
             <Description>
-                {paragraph}
+                <div dangerouslySetInnerHTML={{ __html: paragraph }} />
             </Description>
 
             <ProjectIconLinkAuto
@@ -140,7 +171,7 @@ const DisplayImageDesktop = ({ direction, image, paragraph }) => {
         <MiniContainer>
 
             <Description>
-                {paragraph}
+                <div dangerouslySetInnerHTML={{ __html: paragraph }} />
             </Description>
 
 
@@ -180,52 +211,104 @@ const ProjectEx = ({ index, project }) => {
 
 
     return (
-        <MainContainer>
-
-            <SkewLinksContainer alignSelf='flex-start'>
-                <SkewIconLinkAuto fontSize='50' color='white'>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span>{index}</span>
-                </SkewIconLinkAuto>
-            </SkewLinksContainer>
-
-            <ProjectHeaderContainer>
-                <ProjectTitle>
-                    {project.title}
-                </ProjectTitle>
-
-                {project.link &&
-                    <ProjectLink href={project.link} target="_blank">
-                        {project.link}
-                    </ProjectLink>
+        <Container width='900px' as={motion.div}
+            initial={{
+                y: 100,
+                opacity: 0
+            }}
+            animate={{
+                y: 0,
+                opacity: 1,
+                transition: {
+                    duration: 0.5,
+                    delay: 0.3 * index
                 }
+            }}
+            exit={{
+                y: 100,
+                opacity: 0
+            }}>
+            <MainContainer>
 
-            </ProjectHeaderContainer>
-            {project.images.map((image, index) => {
-                if (index % 2 === 0)
-                    return <DisplayImageDesktop key={index} paragraph={image.paragraph} direction='flex-end' image={image.image} />
-                return <DisplayImagePhone key={index} paragraph={image.paragraph} direction='flex-start' image={image.image} />
-            })}
+                <SkewLinksContainer alignSelf='flex-start'>
+                    <SkewIconLinkAuto fontSize='50' color='white'>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span>{index}</span>
+                    </SkewIconLinkAuto>
+                </SkewLinksContainer>
 
-        </MainContainer>
+                <ProjectHeaderContainer>
+                    <ProjectTitle>
+                        {project.title}
+                    </ProjectTitle>
 
+                    {project.link &&
+                        <ProjectLink href={project.link} target="_blank">
+                            {project.link}
+                        </ProjectLink>
+                    }
+
+                </ProjectHeaderContainer>
+                {project.images.map((image, index) => {
+                    if (index % 2 === 0)
+                        return <DisplayImageDesktop key={index} paragraph={image.paragraph} direction='flex-end' image={image.image} />
+                    return <DisplayImagePhone key={index} paragraph={image.paragraph} direction='flex-start' image={image.image} />
+                })}
+
+            </MainContainer>
+        </Container>
 
     )
 }
 
-export const Projects = () => {
+export const Projects = ({ minHeight, path }) => {
+    const [initial, setInitial] = useState(false)
+
+    useEffect(() => {
+        if (path === '#projects')
+            setInitial(true)
+    }, [path])
+
     const list = generate();
     list.sort((a, b) => {
         return a.date > b.date
     })
-    return (<>
-        {list.map((project, index) => {
-            return <ProjectEx key={index} index={index + 1} project={project} />
-        })}
-    </>
+    return (
+        <Background id="projects" minHeight={minHeight} image="enabled">
+            <AnimatePresence>
+                {initial &&
+                    <div>
+                        <Container width="100%" as={motion.div}
+                            initial={{
+                                y: 100,
+                                opacity: 0
+                            }}
+                            animate={{
+                                y: 0,
+                                opacity: 1,
+                                transition: {
+                                    duration: 0.5
+                                }
+                            }}
+                            exit={{
+                                y: 100,
+                                opacity: 0
+                            }}>
+                            <Header>Tevin Taylor</Header>
+                            <div style={{ textAlign: 'center', fontSize: "xx-large", fontWeight: "lighter" }}>Full Stack Developer</div>
+                        </Container>
+
+                        {list.map((project, index) => {
+                            return <ProjectEx key={index} index={index + 1} project={project} />
+                        })}
+                    </div>
+                }
+            </AnimatePresence>
+        </Background>
+
     )
 }
 
